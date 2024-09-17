@@ -1,16 +1,20 @@
 import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Portfolio from './pages/Portfolio';
+import Contact from './pages/Contact';
+
 
 function App() {
-
   return (
-    <>
-      <header className="App-header">
-        <h1>TYLER DICKENSON</h1>
-        <h2> Coming Soon...</h2>
-      </header>
-        
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+    </Router>
+  );
 }
-
 export default App
