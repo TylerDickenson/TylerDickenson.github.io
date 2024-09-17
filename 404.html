@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=./index.html">
+  <script>
+    // Automatically redirect 404 requests to index.html
+    var pathname = window.location.pathname;
+    if (pathname !== "/") {
+      window.history.replaceState(null, null, "/");
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
