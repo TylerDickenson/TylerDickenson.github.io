@@ -11,8 +11,13 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/main.css'
   ],
+
+  app: {
+    baseURL: '/',
+  },
   
   nitro: {
+    preset: 'github-pages',
     compressPublicAssets: true,
     minify: true,
     // Increase timeout for large assets
