@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ] # Make sure this matches your default branch name
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
@@ -10,9 +10,8 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -20,19 +19,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           cache: 'npm'
-
       - name: Install dependencies
-        run: npm ci || npm install
-
+        run: npm install 
       - name: Static HTML export
         run: npx nuxi generate
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
