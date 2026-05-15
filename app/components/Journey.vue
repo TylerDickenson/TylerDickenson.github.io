@@ -1,98 +1,70 @@
 <template>
-  <section id="journey" class="min-h-screen py-16 bg-cream dark:bg-gray-800 transition-colors duration-300">
-    <div class="container mx-auto px-4 mb-12">
-      <h2 class="font-centurion text-4xl font-bold mb-16 text-center text-slate-800 dark:text-gray-100">My Journey</h2>
-      <div class="timeline-container w-full max-w-3xl mx-auto">
-        <div class="relative" style="height: 90vh;">
-          <div class="timeline-line w-2 bg-slate-400 mx-auto absolute left-1/2 -translate-x-1/2" style="height: calc(100% - 12px); top: 12px;"></div>
-          <div class="timeline-circle absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-500" style="top: 0%"></div>
-          <div class="timeline-circle absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-500" style="top: 25%"></div>
-          <div class="timeline-circle absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-500" style="top: 50%"></div>
-          <div class="timeline-circle absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-500" style="top: 75%"></div>
-          <div class="timeline-circle absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-slate-500" style="top: calc(100% - 2px)"></div>
-          <div
-            ref="firstBox"
-            class="timeline-box-right absolute bg-white border-2 border-slate-400 p-4"
-            :style="{
-              top: '0',
-              left: '50%',
-              marginLeft: boxInView ? '2px' : '550px',
-              transform: 'translateY(12px)',
-              transition: 'margin-left 0.7s cubic-bezier(0.4,0,0.2,1)'
-            }"
+  <section id="journey" class="min-h-screen py-16 bg-cream dark:bg-gray-800 transition-colors duration-300 overflow-x-hidden">
+    <div class="container mx-auto px-4 max-w-3xl">
+      
+      <h2 class="font-centurion text-3xl font-bold mb-12 text-center text-slate-800 dark:text-gray-100 tracking-wide">
+        My Journey
+      </h2>
+
+      <div class="relative w-full">
+        
+        <div class="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-2 bg-slate-200 dark:bg-gray-700 rounded-full"></div>
+        
+        <div 
+          v-for="(item, index) in timelineItems" 
+          :key="index"
+          :data-index="index"
+          class="timeline-item relative w-full mb-8 md:mb-4 flex flex-col md:flex-row transition-all duration-1000 ease-out"
+          :class="[
+            index % 2 === 0 ? 'md:justify-end' : 'md:justify-start',
+            visibleIndices.has(index) 
+              ? 'opacity-100 translate-y-0 md:translate-x-0' 
+              : `opacity-0 translate-y-8 ${index % 2 === 0 ? 'md:translate-x-12' : 'md:-translate-x-12'}`
+          ]"
+        >
+          
+          <div 
+            class="absolute left-4 md:left-1/2 top-6 -translate-x-1/2 z-20 flex items-center justify-center transition-all duration-700 ease-out"
+            :class="[visibleIndices.has(index) ? 'scale-100' : 'scale-0']"
           >
-            <div class="flex items-center gap-2 mb-2">
-              <div class="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center">
-                <Icon name="ph:rocket" class="w-4 h-4 text-green-600" />
-              </div>
-              <h3 class="font-centurion text-xl font-bold text-slate-800">2025</h3>
+            <div 
+              class="absolute w-10 h-10 bg-blue-500/20 rounded-full scale-0"
+              :class="{'animate-[pulse-soft_2.5s_ease-out_infinite]': visibleIndices.has(index)}"
+            ></div>
+            
+            <div class="relative w-6 h-6 rounded-full bg-blue-500 border-4 border-white dark:border-gray-800 shadow-md flex items-center justify-center">
+              <div class="w-1 h-1 rounded-full bg-white opacity-80"></div>
             </div>
-            <h4 class="font-centurion text-lg font-semibold text-slate-700 mb-2">Open to Opportunities</h4>
-            <p class="text-slate-600 leading-relaxed">Looking to gain experience in the tech/finance industry and make an impact.</p>
-          </div>
-          <div
-            ref="secondBox"
-            class="timeline-box-left absolute bg-white border-2 border-slate-400 p-4"
-            :style="{
-              top: 'calc(25% - 136px)',
-              left: '50%',
-              marginLeft: secondBoxInView ? '-352px' : '-550px',
-              transform: 'translateY(-12px)',
-              transition: 'margin-left 0.7s cubic-bezier(0.4,0,0.2,1)'
-            }"
-          >
-            <div class="flex items-center gap-2 mb-2">
-              <div class="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Icon name="ph:graduation-cap" class="w-4 h-4 text-blue-600" />
-              </div>
-              <h3 class="font-centurion text-xl font-bold text-slate-800">2022 - 2025</h3>
-            </div>
-            <h4 class="font-centurion text-lg font-semibold text-slate-700 mb-2">University Studies</h4>
-            <p class="text-slate-600 leading-relaxed">Completed a Bachelor's degree in Computer Science at Swansea University.</p>
           </div>
 
-          <div
-            ref="thirdBox"
-            class="timeline-box-right absolute bg-white border-2 border-slate-400 p-4"
-            :style="{
-              top: 'calc(50% - 320px)',
-              left: '50%',
-              marginLeft: thirdBoxInView ? '2px' : '550px',
-              transform: 'translateY(12px)',
-              transition: 'margin-left 0.7s cubic-bezier(0.4,0,0.2,1)'
-            }"
-          >
-            <div class="flex items-center gap-2 mb-2">
-              <div class="w-6 h-6 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Icon name="ph:student" class="w-4 h-4 text-purple-600" />
+          <div class="w-full md:w-[calc(50%-1.75rem)] pl-12 md:pl-0">
+            
+            <div class="bg-white dark:bg-gray-800 border border-gray-300 p-4 rounded-3xl shadow-sm transform transition-all duration-300 hover:scale-[1.01]">
+              
+              <div class="mb-3 flex">
+                <span class="px-2.5 py-0.5 bg-slate-200 dark:bg-slate-100 text-slate-700 dark:text-slate-800 text-xs font-medium rounded-xl select-none">
+                  {{ item.date }}
+                </span>
               </div>
-              <h3 class="font-centurion text-xl font-bold text-slate-800">2020-2022</h3>
+              
+              <h3 class="font-centurion text-xl font-bold text-slate-800 dark:text-gray-100 mb-0.5">
+                {{ item.title }}
+              </h3>
+              
+              <h4 class="font-centurion text-xs font-semibold text-gray-400 dark:text-gray-300 mb-3 uppercase tracking-wider">
+                {{ item.subtitle }}
+              </h4>
+              
+              <p class="text-gray-600 dark:text-gray-200 leading-relaxed text-sm">
+                {{ item.description }}
+              </p>
             </div>
-            <h4 class="font-centurion text-lg font-semibold text-slate-700 mb-2">A Levels</h4>
-            <p class="text-slate-600 leading-relaxed">Completed A Levels in Computer Science, Product Design and Business Studies.</p>
+
           </div>
-          <div
-            ref="fourthBox"
-            class="timeline-box-left absolute bg-white border-2 border-slate-400 p-4"
-            :style="{
-              top: 'calc(75% - 456px)',
-              left: '50%',
-              marginLeft: fourthBoxInView ? '-352px' : '-550px',
-              transform: 'translateY(-12px)',
-              transition: 'margin-left 0.7s cubic-bezier(0.4,0,0.2,1)'
-            }"
-          >
-            <div class="flex items-center gap-2 mb-2">
-              <div class="w-6 h-6 bg-orange-100 rounded-lg flex items-center justify-center">
-                <Icon name="ph:code" class="w-4 h-4 text-orange-600" />
-              </div>
-              <h3 class="font-centurion text-xl font-bold text-slate-800">2015</h3>
-            </div>
-            <h4 class="font-centurion text-lg font-semibold text-slate-700 mb-2">First Website</h4>
-            <p class="text-slate-600 leading-relaxed">Built first website using HTML in a school ICT class and got hooked.</p>
-          </div>
+
         </div>
       </div>
+
     </div>
   </section>
 </template>
@@ -100,152 +72,72 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const boxInView = ref(false)
-const firstBox = ref(null)
-
-const secondBoxInView = ref(false)
-const secondBox = ref(null)
-
-const thirdBoxInView = ref(false)
-const thirdBox = ref(null)
-
-const fourthBoxInView = ref(false)
-const fourthBox = ref(null)
-
+const visibleIndices = ref(new Set())
 let observer = null
-let observer2 = null
-let observer3 = null
-let observer4 = null
 
-const handleIntersection = (entries) => {
-  if (entries[0].isIntersecting) {
-    boxInView.value = true
-    if (observer && firstBox.value) observer.unobserve(firstBox.value)
+const timelineItems = [
+  {
+    date: '2026',
+    title: 'Open to Opportunities',
+    subtitle: 'Tech & Finance Industry',
+    description: 'Seeking roles in tech and finance to apply my skills and deliver impactful software solutions.'
+  },
+  {
+    date: '2025 - 2026',
+    title: 'MSc Cybersecurity',
+    subtitle: 'Swansea University',
+    description: 'Specializing in systems security, cryptography, and network defense with a practical security focus.'
+  },
+  {
+    date: '2022 - 2025',
+    title: 'BSc Computer Science',
+    subtitle: 'Swansea University',
+    description: 'Graduated with a focus on core algorithms, software engineering principles, and full-stack frameworks.'
+  },
+  {
+    date: '2020 - 2022',
+    title: 'A Levels',
+    subtitle: 'Further Education',
+    description: 'Completed qualifications in Computer Science, Product Design, and Business Studies.'
+  },
+  {
+    date: '2015',
+    title: 'First Website',
+    subtitle: 'The Start',
+    description: 'Built my first website using raw HTML in an ICT class and discovered my passion for coding.'
   }
-}
-
-const handleIntersection2 = (entries) => {
-  if (entries[0].isIntersecting) {
-    secondBoxInView.value = true
-    if (observer2 && secondBox.value) observer2.unobserve(secondBox.value)
-  }
-}
-
-const handleIntersection3 = (entries) => {
-  if (entries[0].isIntersecting) {
-    thirdBoxInView.value = true
-    if (observer3 && thirdBox.value) observer3.unobserve(thirdBox.value)
-  }
-}
-const handleIntersection4 = (entries) => {
-  if (entries[0].isIntersecting) {
-    fourthBoxInView.value = true
-    if (observer4 && fourthBox.value) observer4.unobserve(fourthBox.value)
-  }
-}
+]
 
 onMounted(() => {
-  observer = new window.IntersectionObserver(handleIntersection, {
-    threshold: 0.5,
-  })
-  if (firstBox.value) {
-    observer.observe(firstBox.value)
+  if (!document.getElementById('timeline-pulse-styles')) {
+    const style = document.createElement('style')
+    style.id = 'timeline-pulse-styles'
+    style.innerHTML = `
+      @keyframes pulse-soft {
+        0% { transform: scale(0.5); opacity: 0; }
+        50% { opacity: 0.9; }
+        100% { transform: scale(1.5); opacity: 0; }
+      }
+    `
+    document.head.appendChild(style)
   }
 
-  observer2 = new window.IntersectionObserver(handleIntersection2, {
-    threshold: 0.5,
+  observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const index = parseInt(entry.target.getAttribute('data-index'), 10)
+        visibleIndices.value.add(index)
+      }
+    })
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px' 
   })
-  if (secondBox.value) {
-    observer2.observe(secondBox.value)
-  }
-  observer3 = new window.IntersectionObserver(handleIntersection3, {
-    threshold: 0.5,
-  })
-  if (thirdBox.value) {
-    observer3.observe(thirdBox.value)
-  }
-  observer4 = new window.IntersectionObserver(handleIntersection4, {
-    threshold: 0.5,
-  })
-  if (fourthBox.value) {
-    observer4.observe(fourthBox.value)
-  }
+
+  document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el))
 })
 
 onUnmounted(() => {
-  if (observer && firstBox.value) {
-    observer.unobserve(firstBox.value)
-  }
-  if (observer2 && secondBox.value) {
-    observer2.unobserve(secondBox.value)
-  }
-  if (observer3 && thirdBox.value) {
-    observer3.unobserve(thirdBox.value)
-  }
-  if (observer4 && fourthBox.value) {
-    observer4.unobserve(fourthBox.value)
-  }
+  if (observer) observer.disconnect()
 })
 </script>
-
-<style scoped>
-@media (max-width: 768px) {
-  .timeline-container {
-    width: 90%;
-  }
-  .timeline-line {
-    height: 80vh !important;
-  }
-}
-@media (max-width: 480px) {
-  .timeline-line {
-    height: 70vh !important;
-  }
-}
-.timeline-circle {
-  z-index: 3; 
-}
-.timeline-box-right {
-  width: 350px;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-  position: relative;
-  background-color: white;
-  z-index: 1;
-}
-.timeline-box-right::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: 12px;
-  height: 13px;
-  background-color: #FFFCF5;
-  border-radius: 0 0 100% 0;
-  border-right: 2px solid rgb(148 163 184);
-  border-bottom: 2px solid rgb(148 163 184);
-  z-index: 1;
-}
-.timeline-box-left {
-  width: 350px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  position: relative;
-  background-color: white;
-  
-  z-index: 1;
-}
-.timeline-box-left::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 12px;
-  height: 13px;
-  background-color: #FFFCF5;
-  border-radius: 0 0 0 100%;
-  border-left: 2px solid rgb(148 163 184);
-  border-bottom: 2px solid rgb(148 163 184);
-  z-index: 1;
-}
-</style>
