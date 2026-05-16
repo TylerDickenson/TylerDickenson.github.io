@@ -68,5 +68,6 @@ const toolsIcons = [
   { name: 'npm', icon: 'logos:npm-icon' },
   { name: 'Postman', icon: 'logos:postman-icon' },
   { name: 'Digital Ocean', icon: 'devicon:digitalocean' },
+  { name: 'AWS', icon: 'logos:aws' }, 
 ]
 </script>
