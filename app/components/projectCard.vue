@@ -7,11 +7,12 @@
       data-aos-once="true"
     >
       <div class="grid grid-cols-1 md:grid-cols-2 h-full">
-        <div class="relative overflow-hidden">
+        <div class="relative overflow-hidden aspect-[16/10] md:aspect-auto md:min-h-[320px]">
           <img
             :src="project.image"
             :alt="project.title"
-            class="w-full h-64 md:h-full object-cover transform transition-transform duration-500 hover:scale-110"
+            class="w-full h-full object-cover object-center scale-[1.1] transform transition-transform duration-500 hover:scale-[1.15]"
+            :class="project.imageClass"
           />
           <div class="absolute inset-0"></div>
         </div>

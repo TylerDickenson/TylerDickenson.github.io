@@ -33,6 +33,7 @@ const projects = [
     id: 2,
     title: "CS2 Abritrage Trading Bot",
     image: "/images/cs2-card.png",
+    imageClass: "object-[center_50%]",
     description: "A automated CS2 (Counter Strike 2) item sniping bot that utilises Pupetter with stealth plugin and roating proxies to scrape 3rd party marketplaces for underpriced items. Once an item is found, the bot will send me a notification via Telegram Bot that an underpiced item has been found that I can purchase and Abritrage for a profit. (Github is private due to the nature of the project and ongoing work)",
     technologies: ["Node.js", "Puppeteer", "Sqlite", "Telegram Bot"],
     githubUrl: "https://github.com/TylerDickenson/CS2-Price-Scraper" 
