@@ -32,8 +32,7 @@ const projects = [
   {
     id: 2,
     title: "CS2 Automated Web Scraper",
-    image: "/images/trading-bot-card.png",
-    imageClass: "object-[center_50%]",
+    image: "/images/image.png",
     description: "A custom web scraper built in Go that continuously searches CS2 marketplaces for underpriced items. Once a profitable asset is found, it sends an instant alert to purchase and flip it. To date, this tool has successfully generated over £10,000 in profit. (Repository is private due to active deployment).",
     technologies: ["Go", "Goroutines", "SQLite", "Telegram API"],
     githubUrl: "https://github.com/TylerDickenson/queue-bot", 

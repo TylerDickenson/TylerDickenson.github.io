@@ -11,7 +11,7 @@
           <img
             :src="project.image"
             :alt="project.title"
-            class="w-full h-full object-cover object-center scale-[1.1] transform transition-transform duration-500 hover:scale-[1.15]"
+            class="w-full h-full object-cover object-center transform transition-transform duration-500 hover:scale-[1.15]"
             :class="project.imageClass"
           />
           <div class="absolute inset-0"></div>
