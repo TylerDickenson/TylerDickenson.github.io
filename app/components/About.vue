@@ -12,13 +12,13 @@
         <div class="flex justify-center">
           <div class="relative w-80 h-80 sm:w-96 sm:h-96">
             
-            <div class="absolute -inset-3 bg-gradient-to-tr from-slate-400 via-indigo-400 to-slate-300 dark:from-slate-600 dark:via-indigo-500 dark:to-gray-700 rounded-2xl blur-xl opacity-25 dark:opacity-40 animate-glow"></div>
+            <div class="absolute -inset-3 bg-gradient-to-tr from-slate-400 via-indigo-400 to-slate-300 dark:from-slate-600 dark:via-indigo-500 dark:to-gray-700 rounded-2xl blur-xl opacity-25 dark:opacity-40"></div>
             
             <div class="relative w-full h-full overflow-hidden rounded-2xl bg-white dark:bg-gray-900 border border-slate-200/60 dark:border-slate-700/60 shadow-md">
               <img 
                 src="/images/tyler-profile.png" 
                 alt="Tyler Dickenson" 
-                class="w-full h-full object-cover object-center scale-125 mt-12" 
+                class="w-full h-full object-cover object-center scale-125 mt-2" 
               />
             </div>
           </div>
